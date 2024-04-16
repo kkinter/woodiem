@@ -144,6 +144,7 @@ MEDIA_URL = "/media/"
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 
+AUTH_USER_MODEL = "users.User"
 
 LOGGING = {
     "version": 1,

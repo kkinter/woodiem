@@ -1,0 +1,21 @@
+@default:
+	just --list
+
+build:
+    docker compose -f local.yml up --build -d
+
+# detached 모드에서 Docker 컨테이너를 시작
+up:
+    docker compose -f local.yml up -d
+
+# Docker 컨테이너를 중지하고 제거
+down:
+    docker compose -f local.yml down
+
+#  컨테이너 내에서 Python manage.py 명령을 실행
+python *ARGS:
+    docker compose -f local.yml run --rm django python manage.py {{ ARGS }} 
+
+# Psql
+psql:
+    docker compose -f local.yml exec postgres psql --username=wook --dbname=woodiem
