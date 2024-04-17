@@ -1,15 +1,14 @@
 # ==== pytest ====
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--ds=config.settings.test --reuse-db --import-mode=importlib"
-python_files = [
-    "tests.py",
-    "test_*.py",
+addopts = "--ds=config.settings.local --no-migrations --reuse-db"
+testpaths = [
+    "./tests/",
 ]
 
 # ==== Coverage ====
 [tool.coverage.run]
-include = ["core/**"]
+include = ["./woodiem/**"]
 omit = ["*/migrations/*", "*/tests/*"]
 
 [tool.ruff]

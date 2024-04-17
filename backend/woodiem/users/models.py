@@ -1,11 +1,11 @@
 import uuid
-from datetime import timezone
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
+from django.utils import timezone
 
 
 class CustomUserManager(BaseUserManager):
@@ -62,7 +62,11 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("")
 
         user = self.create_user(
-            email=email, first_name=first_name, last_name=last_name, **extra_fields
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            **extra_fields,
         )
         user.save(using=self._db)
         return user

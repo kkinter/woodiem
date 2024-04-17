@@ -19,3 +19,7 @@ python *ARGS:
 # Psql
 psql:
     docker compose -f local.yml exec postgres psql --username=wook --dbname=woodiem
+
+pytest-all:
+    docker compose -f local.yml exec django pytest
+

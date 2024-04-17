@@ -65,18 +65,14 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": ROOT_DIR / "db.sqlite3",
-    }
-}
-
 # DATABASES = {
-#     "default": env.db(
-#         "DATABASE_URL",
-#     ),
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": ROOT_DIR / "db.sqlite3",
+#     }
 # }
+
+DATABASES = {"default": env.db("DATABASE_URL")}
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
