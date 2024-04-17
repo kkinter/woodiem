@@ -1,35 +1,27 @@
 import {
-  Avatar,
   Box,
-  Button,
-  ButtonGroup,
-  Container,
-  HStack,
+  Flex,
+  Spacer,
+  Heading,
+  Input,
+  IconButton,
+  Avatar,
 } from "@chakra-ui/react";
+import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 
-const NavBar = () => {
+function NavBar() {
   return (
-    <>
-      <HStack spacing="10" justifyContent="space-between">
-        <ButtonGroup
-          size="lg"
-          variant="text.accent"
-          colorScheme="gray"
-          spacing="8"
-        >
-          <Button>Home</Button>
-          <Button>...</Button>
-        </ButtonGroup>
-
-        <HStack>
-          <Avatar boxSize="10" src="https://i.pravatar.cc/300" />
-          <Button size="lg" variant="ghost" colorScheme="gray" spacing="8">
-            Login
-          </Button>
-        </HStack>
-      </HStack>
-    </>
+    <Flex bg="green" p={4} alignItems="center">
+      <Box>
+        <Heading size="md">Woodiem</Heading>
+      </Box>
+      <Spacer />
+      <Input placeholder="Search" mr={4} />
+      <IconButton icon={<SearchIcon />} aria-label="Search" mr={4} />
+      <IconButton icon={<BellIcon />} aria-label="Notifications" mr={4} />
+      <Avatar name="John Doe" src="https://example.com/avatar.jpg" />
+    </Flex>
   );
-};
+}
 
 export default NavBar;
