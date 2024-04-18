@@ -1,26 +1,46 @@
+from dj_rest_auth.registration.views import (
+    ConfirmEmailView,
+    RegisterView,
+    VerifyEmailView,
+)
+from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from drf_spectacular.views import (
-    SpectacularAPIView,
     SpectacularRedocView,
-    SpectacularSwaggerView,
 )
+from woodiem.users.views import GoogleLogin
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path("api/v1/", include("woodiem.users.urls")),
-    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("accounts/", include("allauth.urls")),
     path(
-        "api/v1/schema/swagger/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger",
-    ),
-    path(
-        "api/v1/schema/redoc/",
+        "redoc/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    ###
+    path("user/me", UserDetailsView.as_view(), name="user-details"),
+    path("api/v1/auth/account-confirm-email/<str:key>/", ConfirmEmailView.as_view()),
+    path("api/v1/auth/register/", RegisterView.as_view()),
+    path("api/v1/auth/login/", LoginView.as_view()),
+    path("api/v1/auth/logout/", LogoutView.as_view()),
+    path(
+        "api/v1/auth/verify-email/", VerifyEmailView.as_view(), name="rest_verify_email"
+    ),
+    path(
+        "api/v1/auth/account-confirm-email/",
+        VerifyEmailView.as_view(),
+        name="account_email_verification_sent",
+    ),
+    re_path(
+        r"^api/v1/auth/account-confirm-email/(?P<key>[-:\w]+)/$",
+        VerifyEmailView.as_view(),
+        name="account_confirm_email",
+    ),
+    ## social
+    path("api/v1/auth/google/", GoogleLogin.as_view(), name="google_login"),
 ]
 
 if settings.DEBUG:

@@ -13,4 +13,4 @@ logger = logging.getLogger(__name__)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        logger.info(f"{instance}'s profile has been created.")
+        logger.info(f"{instance}'의 프로필이 생성되었습니다.")
