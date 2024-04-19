@@ -6,13 +6,21 @@ from dj_rest_auth.registration.views import (
 from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
 from django.conf import settings
 from django.contrib import admin
+from django.http import JsonResponse
 from django.urls import include, path, re_path
 from drf_spectacular.views import (
     SpectacularRedocView,
 )
 from woodiem.users.views import GoogleLogin
 
+
+def health_check(request):
+    print("health check")
+    return JsonResponse({"status": "ok"})
+
+
 urlpatterns = [
+    path("health-check/", health_check, name="health-check"),
     path(settings.ADMIN_URL, admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path(

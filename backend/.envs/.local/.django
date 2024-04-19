@@ -1,3 +1,4 @@
 SIGNING_KEY=QiyrHwXB6TwX9t4PSrYie3dOt6Udgi2TNOr7YPcWwioSejLwrI0
 EMAIL_PORT=1025
 DOMAIN=example.com
+DATABASE_URL=postgres://wook:wook@postgres:5432/woodiem
