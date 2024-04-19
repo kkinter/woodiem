@@ -112,7 +112,7 @@ REST_AUTH = {
     "TOKEN_MODEL": None,
     "USE_JWT": True,
     "REGISTER_SERIALIZER": "woodiem.users.serializers.CustomRegisterSerializer",
-    # "LOGIN_SERIALIZER": "woodiem.users.serializers.CustomLoginSerializer",
+    "LOGIN_SERIALIZER": "woodiem.users.serializers.CustomLoginSerializer",
     "REGISTER_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
 }
 
@@ -128,20 +128,19 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 
 LOGIN_URL = "http://localhost:8000/api/v1/auth/login"
 
-SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
             "https://www.googleapis.com/auth/userinfo.email",
             "https://www.googleapis.com/auth/userinfo.profile",
-            "openid",
         ],
         "AUTH_PARAMS": {
-            "access_type": "online",
+            "access_type": "offline",
         },
     }
 }
