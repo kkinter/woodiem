@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Profile
 
 
-class ProfileSerializers(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email")
     name = serializers.SerializerMethodField()
     profile_image = serializers.SerializerMethodField()
@@ -19,7 +19,7 @@ class ProfileSerializers(serializers.ModelSerializer):
         fields = ["email", "name", "profile_image", "profile_image", "nickname", "bio"]
 
 
-class UpdateProfileSerializers(serializers.ModelSerializer):
+class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ["nickname", "bio", "profile_image"]

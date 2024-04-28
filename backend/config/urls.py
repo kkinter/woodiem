@@ -49,6 +49,8 @@ urlpatterns = [
     ),
     ## social
     path("api/v1/auth/google/", GoogleLogin.as_view(), name="google_login"),
+    path("api/v1/profiles/", include("woodiem.profiles.urls")),
+    path("api/v1/articles/", include("woodiem.articles.urls")),
 ]
 
 if settings.DEBUG:

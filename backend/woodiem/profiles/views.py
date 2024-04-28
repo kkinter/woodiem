@@ -15,8 +15,8 @@ from .pagination import ProfilePagination
 from .renderers import ProfileJSONRenderer, ProfilesJSONRenderer
 from .serializers import (
     FollowingSerializer,
-    ProfileSerializers,
-    UpdateProfileSerializers,
+    ProfileSerializer,
+    UpdateProfileSerializer,
 )
 
 User = get_user_model()
@@ -24,14 +24,14 @@ User = get_user_model()
 
 class ProfileListAPIView(generics.ListAPIView):
     queryset = Profile.objects.all()
-    serializer_class = ProfileSerializers
+    serializer_class = ProfileSerializer
     pagination_class = ProfilePagination
     renderer_classes = (ProfilesJSONRenderer,)
 
 
 class ProfileDetailAPIView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = ProfileSerializers
+    serializer_class = ProfileSerializer
     renderer_classes = (ProfileJSONRenderer,)
 
     def get_queryset(self):
@@ -45,7 +45,7 @@ class ProfileDetailAPIView(generics.RetrieveAPIView):
 
 
 class UpdateProfileAPIView(generics.RetrieveAPIView):
-    serializer_class = UpdateProfileSerializers
+    serializer_class = UpdateProfileSerializer
     permission_classes = (IsAuthenticated,)
     parser_classes = (MultiPartParser,)
     renderer_classes = (ProfileJSONRenderer,)
